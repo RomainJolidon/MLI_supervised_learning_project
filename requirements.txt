@@ -1,0 +1,17 @@
+black
+graphviz
+ipdb
+isort
+jupyterlab
+matplotlib
+mypy
+numpy
+optuna
+optuna-dashboard
+pandas
+pandas
+pydot
+seaborn
+sklearn
+termcolor
+wikipedia
