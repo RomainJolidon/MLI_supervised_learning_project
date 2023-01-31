@@ -9,9 +9,8 @@ numpy
 optuna
 optuna-dashboard
 pandas
-pandas
 pydot
 seaborn
-sklearn
+scikit-learn
 termcolor
 wikipedia
