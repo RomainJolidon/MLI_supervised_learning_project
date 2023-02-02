@@ -8,6 +8,7 @@ labels = np.load('dataset/labels.npy')
 
 print('prediction of the winner of a nba game')
 
+
 def logistic_regression():
     print('With LogisticRegression:')
     start = time.time()

@@ -11,7 +11,6 @@ from sklearn.model_selection import train_test_split
 dataset = pd.read_csv('dataset/BankChurners.csv')
 print(dataset.columns)
 
-
 def add_value_labels(ax, spacing=5):
     for rect in ax.patches:
         y_value = rect.get_height()
@@ -84,11 +83,22 @@ def show_churn_rate():
     plt.show()
 
 
-# analyze_data()
+analyze_data()
 show_churn_rate()
 
-classifier = LogisticRegression(random_state=0, penalty='l2')
-x_train, x_test, y_train, y_test = train_test_split(dataset, test_size=0.30) #FIXME retirer la colonne label du dataset
+# Filter features to select only numerical ones
+filtered_df = dataset[['Attrition_Flag', 'Customer_Age', 'Dependent_count', 'Months_on_book',
+                       'Total_Relationship_Count', 'Months_Inactive_12_mon',
+                       'Contacts_Count_12_mon', 'Credit_Limit', 'Total_Revolving_Bal',
+                       'Avg_Open_To_Buy', 'Total_Amt_Chng_Q4_Q1', 'Total_Trans_Amt',
+                       'Total_Trans_Ct', 'Total_Ct_Chng_Q4_Q1']]
+
+classifier = LogisticRegression(random_state=0, penalty='l2', solver='lbfgs', max_iter=100)
+
+X = filtered_df.drop("Attrition_Flag", axis=1).values
+y = np.where(filtered_df["Attrition_Flag"] == 'Attrited Customer', 0, 1)
+
+x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.30)
 
 classifier.fit(x_train, y_train)
 # Predict the Test set results
